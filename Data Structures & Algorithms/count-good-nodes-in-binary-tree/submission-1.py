@@ -1,0 +1,18 @@
+class Solution:
+    def goodNodes(self, root: TreeNode) -> int:
+        self.count = 0
+
+        def dfs(node, max_so_far):
+            if not node:
+                return
+
+            if node.val >= max_so_far:
+                self.count += 1
+
+            max_so_far = max(max_so_far, node.val)
+
+            dfs(node.left, max_so_far)
+            dfs(node.right, max_so_far)
+
+        dfs(root, root.val)
+        return self.count
